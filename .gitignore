@@ -3,5 +3,5 @@ template/*
 origin-openapi-generator/*
 *.jar
 openapi-custom-generator/*
-fastapi-openapi/*
+fastapi-openapi/generate/*
 META-INF/*
