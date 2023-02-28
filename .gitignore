@@ -1,0 +1,7 @@
+mytemplate/*
+template/*
+origin-openapi-generator/*
+*.jar
+openapi-custom-generator/*
+fastapi-openapi/*
+META-INF/*
