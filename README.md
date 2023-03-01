@@ -9,7 +9,7 @@ wget https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.3.0
 .
 ├── apis
 │   └── tags
-│       └── api
+│       └── api(endpoint)
 │           └── methods
 │               ├── delete
 │               ├── get
@@ -53,6 +53,16 @@ DefalutGenerator.java
 Generator をimplementsしている。
 
 OpenAPIGenerator　生成関連？実行時に使用しているのはおそらくこれ
+
+## Step3 generateしたものが動くのか
+とりあえずは公開されている方で実行して問題ないか確認
+
+## Step4 独自のtemplateファイルを指定しても動くか
+とりあえずは公開されている方で実行して問題ないか確認
+
+## Step5 custom generator の作成
+今回は　generate の引数に　fastapi-custom-serverを指定することで独自のgeneratorが呼び出される
+
 
 ## 参考
 - <https://github.com/OpenAPITools/openapi-generator>

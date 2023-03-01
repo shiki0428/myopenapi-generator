@@ -6,3 +6,4 @@ openapi-custom-generator/*
 fastapi-openapi/*generate/*
 fastapi-openapi/template/*
 temp/*
+venv/*

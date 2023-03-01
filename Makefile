@@ -37,3 +37,6 @@ origin_generate:
 origin_template_generate:
 	@openapi-generator generate -g python-fastapi -i ./fastapi-openapi/api/openapi.yaml -o ./fastapi-openapi/origin_generate/ -t ./fastapi-openapi/template/ > generate.log
 
+#./fastapi-openapi/origin_generate/src に移動して実行　(make使えない。。)
+origin_run_server:
+	@../../../venv/bin/uvicorn openapi_server.main:app --reload
