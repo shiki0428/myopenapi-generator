@@ -40,3 +40,6 @@ origin_template_generate:
 #./fastapi-openapi/origin_generate/src に移動して実行　(make使えない。。)
 origin_run_server:
 	@../../../venv/bin/uvicorn openapi_server.main:app --reload
+
+help:
+	@grep "^[a-zA-Z_\-]*:" Makefile | grep -v "grep" | sed -e 's/^/make /' 
