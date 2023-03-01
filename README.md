@@ -65,6 +65,10 @@ OpenAPIGenerator　生成関連？実行時に使用しているのはおそら�
 ./openapi-custom-generator の以下が  
 Step5によって作成したもの
 
+## Step6 custom generatorの修正
+とりあえずディレクトリ構成いじれそうな変数見つけて修正していく  
+- apiをタグごとに分けることは可能
+- http method と　api endpointの情報を持っている雰囲気がない。。。
 
 
 ## 参考
