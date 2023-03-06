@@ -72,7 +72,56 @@ Step5によって作成したもの
 
 ## Step7 generatorそのものをカスタマイズする
 - http method と　api endpointの情報を持っている雰囲気がない。。  
-これに対応する。
+これに対応する。一つずつ処理することで実現可能
+
+api(endpoint)　の部分をどう表現するのが適切か
+
+- URLをディレクトリ名としたとき対応関係がわかりやすいがデメリットとしてURLが長くなった時に管理が大変になる。
+- operationIDをディレクトリ名とした時　可読性は上がることが見込めるが、一目でどのAPIかわからない可能性がある  
+  またSwagger UIで表示した時にoperationIDが表示されないため参照しづらい
+- URLの階層ごとにディレクトリを作成するか  ネストを辿ることに時間を費やしそうな印象、見た目は個人的には好き
+
+ディレクトリ名をoperationIDにして　APIのdescriptionにoperationIDを記述する流れが一番、作成者・閲覧者のコストが掛からなそうなので
+今回はoperationIDで作成する　イメージは以下のようになる
+
+
+```
+├── apis
+│   └── tags
+│       └── operationID
+│           └── methods
+│               ├── delete
+│               ├── get
+│               ├── post
+│               └── put
+│       └── operationID
+│           └── methods
+│               ├── delete
+│               ├── get
+│               ├── post
+│               └── put
+```
+
+上記で対応試みていたが,operationIDは一意なため無駄にネストが無駄になる。
+なのでURLをディレクトリ名とする方針に転換
+スラッシュをアンダースコアに変換してディレクトリ化するなお一文字目のアンダースコアは除外する
+```
+├── apis
+│   └── tags
+│       └── URL
+│           └── methods
+│               ├── delete
+│               ├── get
+│               ├── post
+│               └── put
+│       └── URL
+│           └── methods
+│               ├── delete
+│               ├── get
+│               ├── post
+│               └── put
+```
+
 
 model fileの作成ではx-tags　プロパティを使うことができるようだが、generatorの情報として取得できない
 今回はスキーマ名の_区切りの最初の値をタグと同じ値としてディレクトリを分けることで、対応する。
@@ -85,13 +134,13 @@ model fileの作成ではx-tags　プロパティを使うことができるよ�
 ＿区切りの最初だけでなく＿区切りした場合階層をネスト化していく
 
 EX:) tags_commons_order_response
-
-└── models
-    └── tags(_区切りの最初の値)
-        └── commons(_区切りの最初の値)
-            └── order(_区切りの最初の値)
-                response.py
-
+```
+└── models  
+    └── tags
+        └── commons
+            └── order
+                └──response.py
+```
 
 ## 参考
 - <https://github.com/OpenAPITools/openapi-generator>

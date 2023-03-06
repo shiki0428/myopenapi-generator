@@ -215,7 +215,7 @@ public interface CodegenConfig {
 
     String apiFilename(String templateName, String tag);
 
-    String apiFilename_http_method(String templateName, String tag, String http_method); 
+    String apiFilename_http_method_and_operation_id(String templateName, String tag, String http_method, String operation_id); 
 
     String apiTestFilename(String templateName, String tag);
 
