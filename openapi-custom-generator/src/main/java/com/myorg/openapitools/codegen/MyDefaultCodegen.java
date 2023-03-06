@@ -5832,7 +5832,7 @@ public class MyDefaultCodegen implements CodegenConfig {
     @Override
     public String apiFilename_http_method(String templateName, String tag, String http_method) {
         String suffix = apiTemplateFiles().get(templateName);
-        return apiFileFolder() + File.separator + toApiFilename(tag) + suffix;
+        return apiFileFolder() + File.separator + tag.toLowerCase() +  File.separator + toApiFilename(tag) + suffix;
     }
 
 
