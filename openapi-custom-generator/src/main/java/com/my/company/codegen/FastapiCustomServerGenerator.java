@@ -290,6 +290,7 @@ public class FastapiCustomServerGenerator extends MyAbstractPythonCodegen {
 
     @Override
     public String apiFileFolder() {
+        System.out.println("apiFileFolder():"+String.join(File.separator, new String[]{outputFolder, sourceFolder, apiPackage().replace('.', File.separatorChar)}));
         return String.join(File.separator, new String[]{outputFolder, sourceFolder, apiPackage().replace('.', File.separatorChar)});
     }
 

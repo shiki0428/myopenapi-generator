@@ -1519,6 +1519,7 @@ public class MyDefaultCodegen implements CodegenConfig {
      */
     @Override
     public String toModelFilename(String name) {
+        System.out.println("camelize:"+camelize(name));
         return camelize(name);
     }
 
@@ -5825,15 +5826,22 @@ public class MyDefaultCodegen implements CodegenConfig {
     @Override
     public String apiFilename(String templateName, String tag) {
         String suffix = apiTemplateFiles().get(templateName);
-        return apiFileFolder() + File.separator + tag +  File.separator + toApiFilename(tag) + suffix;
+        return apiFileFolder() + File.separator + tag.toLowerCase() +  File.separator + toApiFilename(tag) + suffix;
     }
+
+    @Override
+    public String apiFilename_http_method(String templateName, String tag, String http_method) {
+        String suffix = apiTemplateFiles().get(templateName);
+        return apiFileFolder() + File.separator + toApiFilename(tag) + suffix;
+    }
+
 
     @Override
     public String modelFilename(String templateName, String modelName) {
         String suffix = modelTemplateFiles().get(templateName);
         System.out.println();
         System.out.println(toModelFilename(modelName).replaceAll("_", "/"));
-        return modelFileFolder() + File.separator + toModelFilename(modelName).replaceAll("_", "/") + suffix;
+        return modelFileFolder() + File.separator + toModelFilename(modelName) + suffix;
     }
 
     /**

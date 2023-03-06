@@ -70,6 +70,28 @@ Step5によって作成したもの
 - apiをタグごとに分けることは可能
 - http method と　api endpointの情報を持っている雰囲気がない。。。
 
+## Step7 generatorそのものをカスタマイズする
+- http method と　api endpointの情報を持っている雰囲気がない。。  
+これに対応する。
+
+model fileの作成ではx-tags　プロパティを使うことができるようだが、generatorの情報として取得できない
+今回はスキーマ名の_区切りの最初の値をタグと同じ値としてディレクトリを分けることで、対応する。
+イメージ
+└── models
+    └── tags(_区切りの最初の値)
+    └── commons(_区切りの最初の値)
+
+更新：
+＿区切りの最初だけでなく＿区切りした場合階層をネスト化していく
+
+EX:) tags_commons_order_response
+
+└── models
+    └── tags(_区切りの最初の値)
+        └── commons(_区切りの最初の値)
+            └── order(_区切りの最初の値)
+                response.py
+
 
 ## 参考
 - <https://github.com/OpenAPITools/openapi-generator>
