@@ -5835,6 +5835,13 @@ public class MyDefaultCodegen implements CodegenConfig {
         return apiFileFolder() + File.separator + tag.toLowerCase() + File.separator + operation_id +File.separator + http_method +  File.separator + toApiFilename(tag) + suffix;
     }
 
+    @Override
+    public String toApiFilename_http_method_and_operation_id(String tag, String http_method, String operation_id) {
+        String path = tag.toLowerCase() + File.separator + operation_id +File.separator + http_method +  File.separator + toApiFilename(tag);
+        path = path.replaceAll("/",".");
+        return path;
+    }
+
 
     @Override
     public String modelFilename(String templateName, String modelName) {

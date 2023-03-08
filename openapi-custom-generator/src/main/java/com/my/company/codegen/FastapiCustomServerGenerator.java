@@ -143,8 +143,8 @@ public class FastapiCustomServerGenerator extends MyAbstractPythonCodegen {
             this.sourceFolder = ((String) additionalProperties.get(CodegenConstants.SOURCE_FOLDER));
         }
 
-        modelPackage = packageName + "." + modelPackage;
-        apiPackage = packageName + "." + apiPackage;
+        modelPackage = modelPackage;
+        apiPackage = apiPackage;
 
         // supportingFiles.add(new SupportingFile("README.mustache", "", "README.md"));
         // supportingFiles.add(new SupportingFile("openapi.mustache", "", "openapi.yaml"));
@@ -152,8 +152,8 @@ public class FastapiCustomServerGenerator extends MyAbstractPythonCodegen {
         // supportingFiles.add(new SupportingFile("docker-compose.mustache", "", "docker-compose.yaml"));
         // supportingFiles.add(new SupportingFile("Dockerfile.mustache", "", "Dockerfile"));
         // supportingFiles.add(new SupportingFile("requirements.mustache", "", "requirements.txt"));
-        // supportingFiles.add(new SupportingFile("security_api.mustache", String.join(File.separator, new String[]{sourceFolder, packageName.replace('.', File.separatorChar)}), "security_api.py"));
-        // supportingFiles.add(new SupportingFile("extra_models.mustache", StringUtils.substringAfter(modelFileFolder(), outputFolder), "extra_models.py"));
+        supportingFiles.add(new SupportingFile("security_api.mustache", String.join(File.separator, new String[]{packageName.replace('.', File.separatorChar)}), "security_api.py"));
+        supportingFiles.add(new SupportingFile("extra_models.mustache", StringUtils.substringAfter(modelFileFolder(), outputFolder), "extra_models.py"));
 
         // Add __init__.py to all sub-folders under namespace pkg
         StringBuilder namespacePackagePath = new StringBuilder(String.join(File.separator, new String[]{sourceFolder, StringUtils.substringBefore(packageName, ".")}));
@@ -182,13 +182,19 @@ public class FastapiCustomServerGenerator extends MyAbstractPythonCodegen {
         String modelImport;
         if (StringUtils.startsWithAny(name, "import", "from")) {
             modelImport = name;
+            modelImport = modelImport.replaceFirst(".","");
         } else {
             modelImport = "from ";
             if (!"".equals(modelPackage())) {
                 modelImport += modelPackage() + ".";
             }
             modelImport += toModelFilename(name) + " import " + name;
+            System.out.println("toModelFilename(name):"+toModelFilename(name));
+            // modelImport = modelImport.replaceFirst(".","");
+
         }
+
+
         return modelImport;
     }
 
@@ -274,7 +280,7 @@ public class FastapiCustomServerGenerator extends MyAbstractPythonCodegen {
         for (String im : imports) {
             if (!im.equals(cm.classname)) {
                 HashMap<String, String> pyImport = new HashMap<>();
-                System.out.println(toModelImport(im));
+                System.out.println("ahaha:"+toModelImport(im));
                 pyImport.put("import", toModelImport(im));
                 pyImports.add(pyImport);
             }

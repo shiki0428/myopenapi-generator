@@ -217,6 +217,8 @@ public interface CodegenConfig {
 
     String apiFilename_http_method_and_operation_id(String templateName, String tag, String http_method, String operation_id); 
 
+    String toApiFilename_http_method_and_operation_id(String tag, String http_method, String operation_id);
+
     String apiTestFilename(String templateName, String tag);
 
     String apiDocFilename(String templateName, String tag);
