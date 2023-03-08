@@ -109,19 +109,17 @@ api(endpoint)　の部分をどう表現するのが適切か
 ├── apis
 │   └── tags
 │       └── URL
-│           └── methods
 │               ├── delete
 │               ├── get
 │               ├── post
 │               └── put
 │       └── URL
-│           └── methods
 │               ├── delete
 │               ├── get
 │               ├── post
 │               └── put
 ```
-
+いい感じ！
 
 model fileの作成ではx-tags　プロパティを使うことができるようだが、generatorの情報として取得できない
 今回はスキーマ名の_区切りの最初の値をタグと同じ値としてディレクトリを分けることで、対応する。
@@ -141,6 +139,15 @@ EX:) tags_commons_order_response
             └── order
                 └──response.py
 ```
+
+## Step8 カスタマイズされた状態でファイル実行できるように修正する。
+
+ディレクトリ構成変更後にtemplateから生成されるファイルのimport先が既存の状態のままなので修正する
+model側の修正は問題なさそう
+
+api側の修正は目処としてはdefaultGeneratorのclassnameをディレクトリと同じ形式にする方法を検討<= 次回
+
+
 
 ## 参考
 - <https://github.com/OpenAPITools/openapi-generator>
