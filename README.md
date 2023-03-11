@@ -145,8 +145,19 @@ EX:) tags_commons_order_response
 ディレクトリ構成変更後にtemplateから生成されるファイルのimport先が既存の状態のままなので修正する
 model側の修正は問題なさそう
 
-api側の修正は目処としてはdefaultGeneratorのclassnameをディレクトリと同じ形式にする方法を検討<= 次回
+api側の修正は目処としてはdefaultGeneratorのclassnameをディレクトリと同じ形式にする方法を検討
 
+import pathを変更成功
+
+as の部分が重複するので対応が必要
+=> mustache templateの変更で実現可能　（classname）
+
+実行パス周りで修正を重ねてとりあえず動く状態になった。
+
+課題  
+- モジュールのパスが他の環境でも通るかの確認
+- ネストが深いAPIでも生成処理問題ないか
+- 定義書変更するたびにgenerateディレクトリを削除することになるので実際の使用方法の検討
 
 
 ## 参考
