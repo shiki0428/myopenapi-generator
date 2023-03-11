@@ -2545,9 +2545,24 @@ public class MyDefaultCodegen implements CodegenConfig {
     @Override
     public String toApiName(String name) {
         if (name.length() == 0) {
-            return "DefaultApi";
+            return "Api";
         }
         return camelize(apiNamePrefix + "_" + name + "_" + apiNameSuffix);
+    }
+
+    @Override
+    public String toApiName_http_method(String name, String http_method) {
+        if (name.length() == 0) {
+            return "DefaultApi";
+        }
+        return camelize(apiNamePrefix + http_method + "_" + name + "_" + apiNameSuffix);
+    }
+    @Override
+    public String toApiName_http_method_and_operation_id(String name, String http_method, String operation_id) {
+        if (name.length() == 0) {
+            return "DefaultApi";
+        }
+        return camelize(apiNamePrefix + "_" + name +  "_" + http_method.replaceAll("\\.","_") + "_" + operation_id + "_" + apiNameSuffix);
     }
 
     /**
@@ -5832,12 +5847,12 @@ public class MyDefaultCodegen implements CodegenConfig {
     @Override
     public String apiFilename_http_method_and_operation_id(String templateName, String tag, String http_method, String operation_id) {
         String suffix = apiTemplateFiles().get(templateName);
-        return apiFileFolder() + File.separator + tag.toLowerCase() + File.separator + operation_id +File.separator + http_method +  File.separator + toApiFilename(tag) + suffix;
+        return apiFileFolder() + File.separator + tag.toLowerCase() + File.separator + operation_id +File.separator + http_method +  File.separator + toApiFilename("") + suffix;
     }
 
     @Override
     public String toApiFilename_http_method_and_operation_id(String tag, String http_method, String operation_id) {
-        String path = tag.toLowerCase() + File.separator + operation_id +File.separator + http_method +  File.separator + toApiFilename(tag);
+        String path = tag.toLowerCase() + File.separator + operation_id +File.separator + http_method +  File.separator + toApiFilename("");
         path = path.replaceAll("/",".");
         return path;
     }
