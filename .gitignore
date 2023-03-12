@@ -1,9 +1,10 @@
 mytemplate/*
-template/*
+template/.template/*
 origin-openapi-generator/*
 *.jar
-openapi-custom-generator/*
+# openapi-custom-generator/*
 fastapi-openapi/*generate/*
 fastapi-openapi/template/*
 temp/*
 venv/*
+*.pyc
