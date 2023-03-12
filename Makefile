@@ -27,7 +27,7 @@ custom_generate:
  #上記　make コマンド実行後に作成されるjarファイルを実行することで自前のopenapi-generatorを実行することができる
 custom_template_generate:
 	@rm -rf ./fastapi-openapi/generate/
-	@java -cp ./fastapi-openapi/tools/openapi-generator_origin.jar:./fastapi-openapi/tools/openapi-generator-cli_origin.jar:./fastapi-openapi/tools/fastapi-custom-server-openapi-generator-1.0.0.jar org.openapitools.codegen.OpenAPIGenerator generate -g fastapi-custom-server -i ./fastapi-openapi/api/openapi.yaml -o ./fastapi-openapi/generate/ -t ./fastapi-openapi/template/fastapi-custom-server/ > generate.log
+	@java -cp ./fastapi-openapi/tools/openapi-generator_origin.jar:./fastapi-openapi/tools/openapi-generator-cli_origin.jar:./fastapi-openapi/tools/fastapi-custom-server-openapi-generator-1.0.0.jar org.openapitools.codegen.OpenAPIGenerator generate -g fastapi-custom-server -i ./fastapi-openapi/api/openapi.yaml -o ./fastapi-openapi/generate/ -t ./fastapi-openapi/template/fastapi-custom-server-ver2/ > generate.log
  
 #オープンソースの何も修正されていない状態のopenapi-generator
 origin_generate:
@@ -37,9 +37,14 @@ origin_generate:
 origin_template_generate:
 	@openapi-generator generate -g python-fastapi -i ./fastapi-openapi/api/openapi.yaml -o ./fastapi-openapi/origin_generate/ -t ./fastapi-openapi/template/ > generate.log
 
-#./fastapi-openapi/origin_generate/src に移動して実行　(make使えない。。)
-origin_run_server:
-	@../../../venv/bin/uvicorn openapi_server.main:app --reload
+
+#pathの追加
+add_path:
+	@cp fastapi-openapi/config/importpath.pth /Users/0428nishiki/Dev/openapi-generator/venv/lib/python3.9/site-packages/importpath.pth
+
+run_server:
+	@venv/bin/uvicorn main:app --reload
+
 
 help:
 	@grep "^[a-zA-Z_\-]*:" Makefile | grep -v "grep" | sed -e 's/^/make /' 
