@@ -60,6 +60,10 @@ class CustomAPIRouter(APIRouter):
             return args
         
         except ModuleNotFoundError as e:
+            for i, arg in enumerate(args_list):
+                if isinstance(arg, types.FunctionType):
+                    endpoint = arg
+            print("not custom api router:",endpoint.__module__+ "." +endpoint.__name__)
             return args
         
         except Exception as e:
