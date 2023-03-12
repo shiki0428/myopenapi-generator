@@ -181,6 +181,24 @@ include_routerの中でadd_api_routeを実行しており、その中のroute.en
 
 後者の対応方法で実装できた。
 
+## 残課題
+- DBと接続できるか(fastapiとsqlalchemyを組み合わせて使用することが多い)  
+- AWS Lambdaで動くかの確認
+    - Mangumみたいなやつ使いそう
+    - moduleのpathが通るか
+    - samで正常にビルドできるかどうか
+    - APIの疎通が確認できるか
+- 処理用のファイル作成は手動で行わなければならない
+    - generateと同じ構成で生成することは可能だと思うが、新規で作成するファイルのみ生成するような仕組みにしなければならない
+    - 別途必要なファイルは generator編集して作成できるようにする
+
+- openapi-generatorの環境作成(javaが使える環境を前提にしている)
+    - Dockerの使用？
+    - 不要なログの消去
+- openapi.yamlの編集方法(定義ファイルも分割出来るようにしたい)
+
+
+
 ## 参考
 - <https://github.com/OpenAPITools/openapi-generator>
 - <https://zenn.dev/ysk1to/books/248fad8cb34abe/viewer/845d1e>
