@@ -181,6 +181,9 @@ include_routerの中でadd_api_routeを実行しており、その中のroute.en
 
 後者の対応方法で実装できた。
 
+## Step10定義ファイル分割化
+残課題の対応方法検討
+
 ## 残課題
 - DBと接続できるか(fastapiとsqlalchemyを組み合わせて使用することが多い)  
 - AWS Lambdaで動くかの確認
@@ -202,6 +205,7 @@ include_routerの中でadd_api_routeを実行しており、その中のroute.en
 ## 参考
 - <https://github.com/OpenAPITools/openapi-generator>
 - <https://zenn.dev/ysk1to/books/248fad8cb34abe/viewer/845d1e>
+- <https://tech.buysell-technologies.com/entry/2021/09/21/095238>
 
 
 

@@ -1,0 +1,20 @@
+post:
+  tags:
+    - pet
+  summary: Add a new pet to the store
+  description: ''
+  operationId: addPet2
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/xml:
+          schema:
+            $ref: '../schemas/pet.yaml'
+        application/json:
+          schema:
+            $ref: '../schemas/pet.yaml'
+    '405':
+      description: Invalid input
+  requestBody:
+    $ref: '../request_body/pet.yaml'

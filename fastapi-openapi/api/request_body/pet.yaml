@@ -1,0 +1,9 @@
+content:
+  application/json:
+    schema:
+      $ref: '../schemas/pet.yaml'
+  application/xml:
+    schema:
+      $ref: '../schemas/pet.yaml'
+description: Pet object that needs to be added to the store
+required: true

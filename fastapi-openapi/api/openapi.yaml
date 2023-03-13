@@ -18,6 +18,8 @@ tags:
   - name: user
     description: Operations about user
 paths:
+  /pet2:
+    $ref: ./path/pet2-post.yaml
   /pet:
     post:
       tags:
@@ -88,7 +90,7 @@ paths:
           required: true
           style: form
           explode: false
-          deprecated: true
+          deprecated: false
           schema:
             type: array
             items:
@@ -156,7 +158,7 @@ paths:
       security:
         - petstore_auth:
             - 'read:pets'
-      deprecated: true
+      deprecated: false
   '/pet/{petId}':
     get:
       tags:
@@ -685,6 +687,8 @@ components:
           format: int64
         name:
           type: string
+        tag: 
+          type: string
       xml:
         name: Tag
     Pet:
@@ -716,7 +720,7 @@ components:
             name: tag
             wrapped: true
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: '#/components/schemas/Tag2'
         status:
           type: string
           description: pet status in the store
@@ -727,6 +731,41 @@ components:
             - sold
       xml:
         name: Pet
+      x-tags: petmodels
+    Tag2:
+      title: Pet Tag
+      description: A tag for a pet
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tag: 
+          type: string
+        Tag3: 
+          $ref: '#/components/schemas/Tag3'
+      xml:
+        name: Tag
+    Tag3:
+      title: Pet Tag
+      description: A tag for a pet
+      type: object
+      properties:
+        Tag4: 
+          $ref: '#/components/schemas/Tag4'
+      xml:
+        name: Tag
+    Tag4:
+      title: Pet Tag
+      description: A tag for a pet
+      type: object
+      properties:
+        Tag4: 
+          type: string
+      xml:
+        name: Tag
     ApiResponse:
       title: An uploaded response
       description: Describes the result of uploading an image resource
@@ -739,3 +778,4 @@ components:
           type: string
         message:
           type: string
+      x-tags: petmodels
