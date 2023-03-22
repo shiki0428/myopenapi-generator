@@ -183,6 +183,8 @@ include_routerの中でadd_api_routeを実行しており、その中のroute.en
 
 ## Step10定義ファイル分割化
 残課題の対応方法検討
+- openapi.yamlの編集方法(定義ファイルも分割出来るようにしたい)
+refでファイル参照することで可能
 
 ## 残課題
 - DBと接続できるか(fastapiとsqlalchemyを組み合わせて使用することが多い)  
