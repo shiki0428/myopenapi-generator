@@ -20,24 +20,21 @@ from models.extra_models import TokenModel  # noqa: F401
 from models.pet import Pet
 
 
-router = APIRouter()
+from common.router.custom_api_router import CustomAPIRouter
+router = CustomAPIRouter()
+
+from . import crud
+from sqlalchemy.orm import Session
 
 
-@router.post(
-    "/pet2",
-    responses={
-        200: {"model": Pet, "description": "successful operation"},
-        405: {"description": "Invalid input"},
-    },
-    tags=["pet"],
-    summary="Add a new pet to the store",
-    response_model_by_alias=True,
-)
+
 async def add_pet2(
     pet: Pet = Body(None, description="Pet object that needs to be added to the store"),
+    db: Session = Depends(crud.get_db)
 ):
-    return {
-        "test":"sucess"
-    }
     """"""
+    a = db.query(crud.User).filter(crud.User.email == 'string').first()
+    print(a)
+
+    return {}
     ...
