@@ -1,0 +1,106 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam
+
+  Sample SAM Template for sam
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 32
+    Tracing: Active
+    Environment:
+      Variables:
+        DIRPATH: !Ref DIRPATH
+        DBUSER: !Ref DBUSER
+        DBPASSWORD: !Ref DBPASSWORD
+        DBHOST: !Ref DBHOST
+        DBPORT: !Ref DBPORT
+        DBNAME: !Ref DBNAME
+        EXECPATH: !Ref EXECPATH
+  Api:
+    # Type: AWS::Serverless::Api
+    OpenApiVersion: 3.0.1
+      # StageName: dev
+
+Parameters:
+  EnvName:
+    Type: String
+    Default: dev
+  
+  DIRPATH:
+    Type: String
+    Default: app.src
+
+  DBUSER:
+    Type: String
+
+  DBPASSWORD:
+    Type: String
+
+  DBHOST:
+    Type: String
+
+  DBPORT:
+    Type: String
+
+  DBNAME:
+    Type: String
+  
+  EXECPATH:
+    Type: String
+
+
+Resources:
+
+  CommonLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: common-layer
+      Description: Common Application Resource Layer
+      ContentUri: '../config/'
+      CompatibleRuntimes:
+        - python3.9
+    Metadata:
+      BuildMethod: python3.9
+      
+  HelloWorldAPIGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+
+  HelloWorldFastApiFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: '../fastapi-openapi/backend/'
+      Handler: generate.src.main.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /{proxy+}        
+            Method: Any
+            RestApiId:
+              Ref: HelloWorldAPIGateway
+      Layers:
+        - !Ref CommonLayer
+
+
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  HelloWorldFastApiFunction:
+    Description: "API Gateway endpoint URL for stage for Hello World function"
+    Value: !Sub "https://${HelloWorldFastApiFunction}.execute-api.${AWS::Region}.amazonaws.com/${EnvName}/"
+  # HelloWorldFunction:
+  #   Description: "Hello World Lambda Function ARN"
+  #   Value: !GetAtt HelloWorldFunction.Arn
+  # HelloWorldFunctionIamRole:
+  #   Description: "Implicit IAM Role created for Hello World function"
+  #   Value: !GetAtt HelloWorldFunctionRole.Arn
