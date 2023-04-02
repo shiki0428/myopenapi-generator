@@ -40,7 +40,7 @@ origin_template_generate:
 
 #pathの追加
 add_path:
-	@cp fastapi-openapi/config/importpath.pth /Users/0428nishiki/Dev/openapi-generator/venv/lib/python3.9/site-packages/importpath.pth
+	@cp fastapi-openapi/config/importpath.pth ./venv/lib/python3.9/site-packages/importpath.pth
 
 run_server:
 	@venv/bin/uvicorn main:app --reload
@@ -48,3 +48,15 @@ run_server:
 
 help:
 	@grep "^[a-zA-Z_\-]*:" Makefile | grep -v "grep" | sed -e 's/^/make /' 
+
+#DBからスキーマ情報を取得する
+sql_codegen:
+	@venv/bin/sqlacodegen postgresql://user:user@localhost:5432/postgres --outfile ./fastapi-openapi/common/database/models.py 
+
+#migrateの作成
+alembic_revision:
+	@venv/bin/alembic revision --autogenerate -m "tag table add is_active"
+
+#更新を最新化
+alembic_upgrade:
+	@venv/bin/alembic upgrade head   
