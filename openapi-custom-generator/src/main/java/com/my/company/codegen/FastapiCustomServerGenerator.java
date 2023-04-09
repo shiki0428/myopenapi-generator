@@ -189,7 +189,7 @@ public class FastapiCustomServerGenerator extends MyAbstractPythonCodegen {
                 modelImport += modelPackage() + ".";
             }
             modelImport += toModelFilename(name) + " import " + name;
-            System.out.println("toModelFilename(name):"+toModelFilename(name));
+            // System.out.println("toModelFilename(name):"+toModelFilename(name));
             // modelImport = modelImport.replaceFirst(".","");
 
         }
@@ -280,7 +280,7 @@ public class FastapiCustomServerGenerator extends MyAbstractPythonCodegen {
         for (String im : imports) {
             if (!im.equals(cm.classname)) {
                 HashMap<String, String> pyImport = new HashMap<>();
-                System.out.println("ahaha:"+toModelImport(im));
+                // System.out.println("ahaha:"+toModelImport(im));
                 pyImport.put("import", toModelImport(im));
                 pyImports.add(pyImport);
             }
@@ -296,13 +296,13 @@ public class FastapiCustomServerGenerator extends MyAbstractPythonCodegen {
 
     @Override
     public String apiFileFolder() {
-        System.out.println("apiFileFolder():"+String.join(File.separator, new String[]{outputFolder, sourceFolder, apiPackage().replace('.', File.separatorChar)}));
+        // System.out.println("apiFileFolder():"+String.join(File.separator, new String[]{outputFolder, sourceFolder, apiPackage().replace('.', File.separatorChar)}));
         return String.join(File.separator, new String[]{outputFolder, sourceFolder, apiPackage().replace('.', File.separatorChar)});
     }
 
     @Override
     public String modelFileFolder() {
-        System.out.println(String.join(File.separator, new String[]{outputFolder, sourceFolder, modelPackage().replace('.', File.separatorChar)}));
+        // System.out.println(String.join(File.separator, new String[]{outputFolder, sourceFolder, modelPackage().replace('.', File.separatorChar)}));
         return String.join(File.separator, new String[]{outputFolder, sourceFolder, modelPackage().replace('.', File.separatorChar)});
     }
 

@@ -689,7 +689,7 @@ public abstract class MyAbstractPythonCodegen extends MyDefaultCodegen implement
     public String toModelFilename(String name) {
         // underscore the model file name
         // PhoneNumber => phone_number
-        System.out.println("model file name:"+underscore(dropDots(toModelName(name))).replaceAll("_", "/"));
+        // System.out.println("model file name:"+underscore(dropDots(toModelName(name))).replaceAll("_", "/"));
         return underscore(dropDots(toModelName(name))).replaceAll("_", "/");
     }
 

@@ -1519,7 +1519,7 @@ public class MyDefaultCodegen implements CodegenConfig {
      */
     @Override
     public String toModelFilename(String name) {
-        System.out.println("camelize:"+camelize(name));
+        // System.out.println("camelize:"+camelize(name));
         return camelize(name);
     }
 
@@ -5851,6 +5851,12 @@ public class MyDefaultCodegen implements CodegenConfig {
     }
 
     @Override
+    public String apiFilename_http_method_and_operation_id_op(String templateName, String tag, String http_method, String operation_id) {
+        String suffix = apiTemplateFiles().get(templateName);
+        return apiFileFolder().replaceAll("generate","app") + File.separator + tag.toLowerCase() + File.separator + operation_id +File.separator + http_method +  File.separator + toApiFilename("") + suffix;
+    }
+
+    @Override
     public String toApiFilename_http_method_and_operation_id(String tag, String http_method, String operation_id) {
         String path = tag.toLowerCase() + File.separator + operation_id +File.separator + http_method +  File.separator + toApiFilename("");
         path = path.replaceAll("/",".");
@@ -5861,8 +5867,8 @@ public class MyDefaultCodegen implements CodegenConfig {
     @Override
     public String modelFilename(String templateName, String modelName) {
         String suffix = modelTemplateFiles().get(templateName);
-        System.out.println();
-        System.out.println(toModelFilename(modelName).replaceAll("_", "/"));
+        // System.out.println();
+        // System.out.println(toModelFilename(modelName).replaceAll("_", "/"));
         return modelFileFolder() + File.separator + toModelFilename(modelName) + suffix;
     }
 
