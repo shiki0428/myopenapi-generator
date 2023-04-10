@@ -11,3 +11,4 @@ venv/*
 *.class
 sam-app/*
 .env
+.vscode

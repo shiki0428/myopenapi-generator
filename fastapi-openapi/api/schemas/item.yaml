@@ -1,4 +1,4 @@
-Pet:
+Item:
   title: a Pet
   description: A pet for sale in the pet store
   type: object

@@ -1,0 +1,18 @@
+post:
+  tags:
+    - item
+  summary: Add a new pet to the store
+  description: ''
+  operationId: addItem
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              # openapi.yaml で定義したスキーマを参照する場合
+              $ref: "../openapi.yaml#/components/schemas/Item"  
+
+  requestBody:
+    $ref: '../request_body/Pet.yaml#/components/Pet'

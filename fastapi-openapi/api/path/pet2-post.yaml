@@ -10,11 +10,11 @@ post:
       content:
         application/xml:
           schema:
-            $ref: '../schemas/pet.yaml'
+            $ref: '../openapi.yaml#/components/schemas/Pet'
         application/json:
           schema:
-            $ref: '../schemas/pet.yaml'
+            $ref: '../openapi.yaml#/components/schemas/Pet'
     '405':
       description: Invalid input
   requestBody:
-    $ref: '../request_body/pet.yaml'
+    $ref: '../request_body/Pet.yaml#/components/Pet'
