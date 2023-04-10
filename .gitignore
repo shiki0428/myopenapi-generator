@@ -3,8 +3,10 @@ template/.template/*
 origin-openapi-generator/*
 *.jar
 # openapi-custom-generator/*
-fastapi-openapi/*generate/*
-fastapi-openapi/template/*
+fastapi-openapi/backend/generate/*
+fastapi-openapi/template/.template/*
 temp/*
 venv/*
 *.pyc
+*.class
+sam-app/*
